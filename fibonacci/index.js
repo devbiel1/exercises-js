@@ -1,6 +1,6 @@
 var baseValue = 10
 
-function fibonacciGenerator(base) {
+function righttriangleGenerator(base) {
 
     for (i = 0; i < base + 1; i++) {
 
@@ -10,4 +10,4 @@ function fibonacciGenerator(base) {
 
 }
 
-fibonacciGenerator(baseValue)
+righttriangleGenerator(baseValue)
