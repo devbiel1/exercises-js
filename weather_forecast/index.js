@@ -10,4 +10,5 @@ fetch(url)
         console.log(`Temperatura: ${data.current.temp_c}°C`);
         console.log(`Clima: ${data.current.condition.text}`);
         console.log(`Umidade: ${data.current.humidity}%`);
+        console.log(data)
     })
