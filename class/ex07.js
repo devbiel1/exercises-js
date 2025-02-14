@@ -2,39 +2,56 @@ class Books {
 
     static biblioteca = [];
 
-    constructor(nome, pagNum, disponibilidade = true) {
-
-        this.nome = nome
-        this.pagNum = pagNum
-        this.disponibilidade = disponibilidade
+    static adicionarLivro(nome, autor, numPag) {
 
         Books.biblioteca.push(
-
             {
-                nome: this.nome,
-                paginas: this.pagNum,
-                disponibilidade: this.disponibilidade
-            }         
+                nome: nome,
+                autor: autor,
+                numPag: numPag,
+                disponibilidade: true
+            }
         )
     }
 
     static emprestar(nome) {
 
-        var livroSolicitado = Books.biblioteca.find((element) => element.nome == nome)
+        let livroSolicitado = Books.biblioteca.find((livro) => livro.nome.toLowerCase() === nome.toLowerCase())
         
         if (livroSolicitado === undefined) {
+            console.log("Nao temos esse livro em nossa biblioteca")
+            return
 
-            throw new Error("Livro indisponivel")
         }
 
         if (livroSolicitado.disponibilidade == false) {
-
             console.log("O livro solicitado esta indisponivel no momento")
 
         } else {
 
             livroSolicitado.disponibilidade = false
-            return livroSolicitado
+            console.log("Livro Emprestado!")
+
+        }
+
+    }
+
+    static devolver(nome) {
+
+        let livroSolicitado = Books.biblioteca.find((livro) => livro.nome.toLowerCase() == nome.toLowerCase())
+
+        if(livroSolicitado === undefined) {
+            console.log("Nao temos esse livro em nossa biblioteca")
+
+        }
+
+        if(livroSolicitado.disponibilidade == true) {
+            console.log("Esse livro ja foi devolvido")
+
+        } else {
+
+            livroSolicitado.disponibilidade = true
+            console.log("Livro devolvido com suscesso. Obrigado!")
 
         }
 
@@ -42,10 +59,11 @@ class Books {
 
 }
 
-var myBook = new Books("Crime e Castigo", 300)
-var yourBook = new Books("A Arte da Querra", 500)
+Books.adicionarLivro("Crime e Castigo", "Dostoievski", 500)
+Books.adicionarLivro("A Arte da Guerra", "Sun Tzu", 100)
 
-console.log(myBook)
+Books.emprestar("Crime e Castigo")
 console.log(Books.biblioteca)
-console.log(Books.emprestar("Crime e Castigo"))
-console.log(myBook)
+
+Books.devolver("Crime e Castigo")
+console.log(Books.biblioteca)
